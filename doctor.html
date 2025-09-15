@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1A243F;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #87CEEB, #007BFF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* For Webkit-based browsers (Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A243F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #283857;
+            border-radius: 10px;
+            border: 2px solid #1A243F;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen bg-[#1A243F] text-gray-200">
+
+    <aside class="w-64 bg-[#1A243F] p-4 flex flex-col items-center shadow-lg transition-all duration-300">
+        <div class="mb-8 w-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#87CEEB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9.273a.75.75 0 0 1 .796-.062l5.772 3.848a.75.75 0 0 1 0 1.224l-5.772 3.848a.75.75 0 0 1-.796-.062A.75.75 0 0 1 7.5 17.25V6.75a.75.75 0 0 1 .728-.777zM4.5 12a7.5 7.5 0 1 1 15 0a7.5 7.5 0 0 1-15 0z" />
+            </svg>
+            <span id="doctorNameSidebar" class="ml-2 text-2xl font-bold tracking-tight gradient-text">Dr. Evelyn</span>
+        </div>
+        <nav class="flex-grow w-full space-y-2">
+            <button class="sidebar-item flex items-center w-full px-4 py-3 rounded-xl transition-all duration-200 hover:scale-105 focus:outline-none bg-[#283857]" data-section="dashboard">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 .75.75v11.5a.75.75 0 0 1-.75.75H3.75a.75.75 0 0 1-.75-.75V10zM12 4.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-4.5zM3.75 4.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-4.5zM12 10.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-4.5zM15.75 10.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-4.5zM9.75 10.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-4.5zM6.75 10.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-4.5z" /></svg>
+                <span class="ml-3 font-medium text-blue-400">Dashboard</span>
+            </button>
+            <button class="sidebar-item flex items-center w-full px-4 py-3 rounded-xl transition-all duration-200 hover:scale-105" data-section="my-patients">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 16c0-1.657 3.582-3 8-3s8 1.343 8 3v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2z" /></svg>
+                <span class="ml-3 font-medium text-green-400">My Patients</span>
+            </button>
+            <button class="sidebar-item flex items-center w-full px-4 py-3 rounded-xl transition-all duration-200 hover:scale-105" data-section="appointments">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3.5a1.5 1.5 0 0 1 1.5-1.5h5A1.5 1.5 0 0 1 16 3.5V7M8 7h8M8 7H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2M12 12h.01M12 16h.01M16 12h.01M16 16h.01M8 12h.01M8 16h.01" /></svg>
+                <span class="ml-3 font-medium text-yellow-400">Appointments</span>
+            </button>
+             <button class="sidebar-item flex items-center w-full px-4 py-3 rounded-xl transition-all duration-200 hover:scale-105" data-section="settings">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" /></svg>
+                <span class="ml-3 font-medium text-gray-400">Settings / Profile</span>
+            </button>
+        </nav>
+        
+        <div class="mt-auto w-full pt-4 border-t border-gray-700">
+            <button id="logoutBtn" class="flex items-center w-full px-4 py-3 rounded-xl text-red-400 transition-all duration-200 hover:bg-red-900/50 hover:scale-105 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                <span class="ml-3 font-medium">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-grow p-6 md:p-10 bg-[#1A243F] overflow-y-auto">
+        <h1 id="main-title" class="text-3xl md:text-4xl font-bold text-gray-200 mb-6 md:mb-10">Dashboard</h1>
+        
+        <div id="dashboard" class="section space-y-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-[#283857] p-6 rounded-2xl shadow-md transition-all duration-200 transform hover:scale-105">
+                    <p class="text-sm text-gray-400 font-semibold mb-2">Total Patients</p>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 16c0-1.657 3.582-3 8-3s8 1.343 8 3v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2z" /></svg>
+                        <span class="ml-4 text-4xl font-bold text-white">125</span>
+                    </div>
+                </div>
+                <div class="bg-[#283857] p-6 rounded-2xl shadow-md transition-all duration-200 transform hover:scale-105">
+                    <p class="text-sm text-gray-400 font-semibold mb-2">Appointments Today</p>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3.5a1.5 1.5 0 0 1 1.5-1.5h5A1.5 1.5 0 0 1 16 3.5V7M8 7h8M8 7H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2M12 12h.01M12 16h.01M16 12h.01M16 16h.01M8 12h.01M8 16h.01" /></svg>
+                        <span class="ml-4 text-4xl font-bold text-white">4</span>
+                    </div>
+                </div>
+                 <div class="bg-[#283857] p-6 rounded-2xl shadow-md transition-all duration-200 transform hover:scale-105">
+                    <p class="text-sm text-gray-400 font-semibold mb-2">New Alerts</p>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        <span class="ml-4 text-4xl font-bold text-white">2</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <h2 class="text-xl font-semibold text-gray-200 mb-4">Quick Actions</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <button class="bg-[#283857] p-4 rounded-xl flex flex-col items-center justify-center hover:bg-[#3a4c6e] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>
+                            <span class="font-medium text-center">Add Patient</span>
+                        </button>
+                        <button class="bg-[#283857] p-4 rounded-xl flex flex-col items-center justify-center hover:bg-[#3a4c6e] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z" /></svg>
+                            <span class="font-medium text-center">Create Prescription</span>
+                        </button>
+                        <button class="bg-[#283857] p-4 rounded-xl flex flex-col items-center justify-center hover:bg-[#3a4c6e] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 0 1-4-4V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v12a4 4 0 0 1-4 4zm0 0h12a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 0 1 2.828 0l2.829 2.829a2 2 0 0 1 0 2.828l-8.486 8.485M7 17h.01" /></svg>
+                            <span class="font-medium text-center">Review Lab Reports</span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-200 mb-4">Notifications & Reminders</h2>
+                    <div class="space-y-3">
+                        <div class="bg-[#283857] p-3 rounded-lg flex items-start">
+                            <div class="bg-yellow-500/20 text-yellow-400 p-2 rounded-full mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg></div>
+                            <div>
+                                <p class="font-medium">Upcoming: John Doe</p>
+                                <p class="text-sm text-gray-400">11:30 AM - Follow-up</p>
+                            </div>
+                        </div>
+                        <div class="bg-[#283857] p-3 rounded-lg flex items-start">
+                             <div class="bg-red-500/20 text-red-400 p-2 rounded-full mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 0 1-7 7m0 0a7 7 0 0 1-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 0 1-3-3V5a3 3 0 1 1 6 0v2a3 3 0 0 1-3 3z" /></svg></div>
+                            <div>
+                                <p class="font-medium">Follow-up Due: Jane Smith</p>
+                                <p class="text-sm text-gray-400">Diabetes Check-up</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold text-gray-200 mb-4">Analytics</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-[#283857] p-6 rounded-2xl">
+                        <h3 class="font-semibold mb-4">Patient Health Trends (BP)</h3>
+                        <div class="h-64 bg-[#1A243F] rounded-lg flex items-center justify-center"><p class="text-gray-500">Chart will be displayed here</p></div>
+                    </div>
+                    <div class="bg-[#283857] p-6 rounded-2xl">
+                         <h3 class="font-semibold mb-4">Weekly Appointments</h3>
+                        <div class="h-64 bg-[#1A243F] rounded-lg flex items-center justify-center"><p class="text-gray-500">Chart will be displayed here</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="my-patients" class="section hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <h2 class="text-2xl font-semibold text-gray-200">My Patients</h2>
+                <div class="flex items-center gap-4 w-full md:w-auto">
+                    <input type="text" placeholder="Search patient by name or ID..." class="bg-[#283857] border border-gray-600 rounded-lg px-4 py-2 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button class="bg-[#007BFF] text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 flex-shrink-0">Add New Patient</button>
+                </div>
+            </div>
+            <div class="bg-[#283857] rounded-2xl shadow-md overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="border-b border-gray-700">
+                        <tr>
+                            <th class="px-6 py-4 font-semibold">Patient Name</th>
+                            <th class="px-6 py-4 font-semibold">Age</th>
+                            <th class="px-6 py-4 font-semibold">Gender</th>
+                            <th class="px-6 py-4 font-semibold">Chronic Condition</th>
+                            <th class="px-6 py-4 font-semibold text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patient-list-body">
+                        <tr>
+                            <td colspan="5" class="text-center px-6 py-4 text-gray-400">Loading patients...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="appointments" class="section hidden space-y-6">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-200">Appointments Schedule</h2>
+            <div class="flex items-center space-x-2 border-b border-gray-700 pb-2 mb-4">
+                <button class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium">Upcoming</button>
+                <button class="px-4 py-2 rounded-lg hover:bg-[#283857] font-medium">Past</button>
+                <button class="px-4 py-2 rounded-lg hover:bg-[#283857] font-medium">Canceled</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-[#283857] p-4 rounded-xl shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4">
+                            <div class="text-center w-20">
+                                <p class="text-2xl font-bold text-white">10:30</p>
+                                <p class="text-sm text-gray-400">AM</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-lg text-white">Michael Johnson</p>
+                                <p class="text-sm text-gray-400">Patient ID: #P78910</p>
+                                <p class="text-sm text-green-400 mt-1">Reason: Annual Check-up</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600">Start Call</button>
+                        <button class="bg-gray-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-700">Reschedule</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings" class="section hidden">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-200">Settings / Profile</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-[#283857] p-8 rounded-2xl shadow-md space-y-6">
+                    <div class="pb-4 border-b border-gray-700">
+                        <h3 class="text-xl font-bold text-white" id="profileName">Dr. Evelyn Reed</h3>
+                        <p class="text-sm text-gray-400" id="profileEmail">evelyn.reed@clinic.com</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-sm font-medium text-gray-400">Phone Number</label>
+                            <p class="text-lg text-white" id="profilePhone">+1 (555) 123-4567</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-400">Country</label>
+                            <p class="text-lg text-white" id="profileCountry">United States</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-400">Hospital / Clinic</label>
+                            <p class="text-lg text-white" id="profileHospital">Community Health Clinic</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-400">Specialization</label>
+                            <p class="text-lg text-white" id="profileSpecialization">Cardiology</p>
+                        </div>
+                    </div>
+                     <div class="pt-6 border-t border-gray-700 flex justify-end">
+                        <button class="bg-[#007BFF] text-white px-6 py-2 rounded-xl font-medium hover:bg-blue-600">Edit Profile</button>
+                    </div>
+                </div>
+                <div class="bg-[#283857] p-8 rounded-2xl shadow-md space-y-6">
+                     <h3 class="text-xl font-bold text-white">Account Settings</h3>
+                     <div class="space-y-4">
+                         <div>
+                             <label for="current-password" class="text-sm font-medium text-gray-400">Current Password</label>
+                             <input type="password" id="current-password" class="mt-1 block w-full bg-[#1A243F] border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                         </div>
+                         <div>
+                             <label for="new-password" class="text-sm font-medium text-gray-400">New Password</label>
+                             <input type="password" id="new-password" class="mt-1 block w-full bg-[#1A243F] border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                         </div>
+                     </div>
+                     <div class="pt-6 border-t border-gray-700 flex justify-end">
+                        <button class="bg-[#007BFF] text-white px-6 py-2 rounded-xl font-medium hover:bg-blue-600">Change Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+        <script src="doctor-dashboard-handler.js" type="module"></script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .form-section {
+            border-top: 4px solid #007BFF; /* Ocean Blue header accent */
+        }
+    </style>
+</head>
+<body class="bg-[#0d1b2a] text-[#F8F9FA] flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-2xl">
+
+        <div class="form-section bg-[#112233] p-8 rounded-xl">
+            <h1 class="text-2xl font-bold mb-1 text-[#F8F9FA] text-center">One Last Step!</h1>
+            <p class="text-gray-300 mb-8 text-center">Please provide your health details to complete your profile.</p>
+
+            <form id="onboardingForm" class="space-y-6">
+
+                <!-- Personal Information Section -->
+                <fieldset class="border border-gray-700 p-4 rounded-lg">
+                    <legend class="px-2 text-lg font-semibold text-gray-200">Personal Information</legend>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                            <input type="text" id="name" disabled class="mt-1 block w-full px-3 py-2 bg-[#1b2f44]/50 border border-gray-600 text-gray-400 rounded-md cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300">Email Address</label>
+                            <input type="email" id="email" disabled class="mt-1 block w-full px-3 py-2 bg-[#1b2f44]/50 border border-gray-600 text-gray-400 rounded-md cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-300">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="+1 (555) 123-4567" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 text-white rounded-md">
+                        </div>
+                        <div>
+                            <label for="dob" class="block text-sm font-medium text-gray-300">Date of Birth</label>
+                            <input type="date" id="dob" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 text-white rounded-md">
+                        </div>
+                         <div>
+                            <label for="bloodType" class="block text-sm font-medium text-gray-300">Blood Type</label>
+                            <select id="bloodType" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 text-white rounded-md">
+                                <option value="">Select...</option>
+                                <option value="A+">A+</option><option value="A-">A-</option><option value="B+">B+</option><option value="B-">B-</option>
+                                <option value="AB+">AB+</option><option value="AB-">AB-</option><option value="O+">O+</option><option value="O-">O-</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Medical History Section -->
+                <fieldset class="border border-gray-700 p-4 rounded-lg">
+                    <legend class="px-2 text-lg font-semibold text-gray-200">Medical History</legend>
+                    <div class="space-y-4 pt-2">
+                        <div>
+                            <label for="disease" class="block text-sm font-medium text-gray-300">Primary Disease / Condition</label>
+                            <input type="text" id="disease" placeholder="e.g., Hypertension" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md">
+                        </div>
+                         <div>
+                            <label for="familyHistory" class="block text-sm font-medium text-gray-300">Family History of Disease <span class="text-gray-500">(if any)</span></label>
+                            <textarea id="familyHistory" rows="2" placeholder="e.g., Father had a history of heart disease." class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md"></textarea>
+                        </div>
+                         <div>
+                            <label for="allergies" class="block text-sm font-medium text-gray-300">Known Allergies <span class="text-gray-500">(comma-separated)</span></label>
+                            <input type="text" id="allergies" placeholder="e.g., Penicillin, Peanuts" class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md">
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!-- Current Health Status Section -->
+                 <fieldset class="border border-gray-700 p-4 rounded-lg">
+                    <legend class="px-2 text-lg font-semibold text-gray-200">Current Health Status</legend>
+                     <div class="space-y-4 pt-2">
+                        <div>
+                            <label for="medications" class="block text-sm font-medium text-gray-300">Current Medications <span class="text-gray-500">(comma-separated)</span></label>
+                            <textarea id="medications" rows="2" placeholder="e.g., Metformin 500mg, Aspirin 81mg" class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md"></textarea>
+                        </div>
+                         <div>
+                            <label for="vitals" class="block text-sm font-medium text-gray-300">Recent Vitals</label>
+                            <input type="text" id="vitals" placeholder="e.g., Blood Pressure: 120/80 mmHg" class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md">
+                        </div>
+                         <div>
+                            <label for="appointments" class="block text-sm font-medium text-gray-300">Scheduled Appointments</label>
+                            <textarea id="appointments" rows="2" placeholder="e.g., Dr. Smith on Oct 26, 2024" class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md"></textarea>
+                        </div>
+                         <div>
+                            <label for="testResults" class="block text-sm font-medium text-gray-300">Recent Test Results</label>
+                            <textarea id="testResults" rows="2" placeholder="e.g., Blood sugar normal on Oct 20, 2024" class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="w-full bg-[#007BFF] text-white py-3 rounded-lg font-semibold hover:bg-[#0056b3] transition duration-300">Save and Complete Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCL1crs6TFPLZLZR607kBU1UHkYrGaCxmU",
+            authDomain: "healthsync-7263e.firebaseapp.com",
+            projectId: "healthsync-7263e",
+            storageBucket: "healthsync-7263e.firebasestorage.app",
+            messagingSenderId: "769113656753",
+            appId: "1:769113656753:web:f80edc9673615912d44190"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const onboardingForm = document.getElementById('onboardingForm');
+
+        // Function to pre-fill basic user info
+        async function populateUserInfo(user) {
+            const userDocRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(userDocRef);
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                document.getElementById('name').value = userData.name || '';
+                document.getElementById('email').value = userData.email || '';
+                document.getElementById('phone').value = userData.phone || '';
+            }
+        }
+
+        // Auth state listener
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                populateUserInfo(user);
+            } else {
+                console.log("No user is signed in. Redirecting to login.");
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Form submission listener
+        onboardingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+
+            if (user) {
+                // 1. Collect data for the new 'patientData' collection.
+                // This keeps sensitive medical info separate from the main user profile.
+                const patientMedicalData = {
+                    uid: user.uid, // Link this data back to the user
+                    dob: document.getElementById('dob').value,
+                    bloodType: document.getElementById('bloodType').value,
+                    disease: document.getElementById('disease').value,
+                    familyHistory: document.getElementById('familyHistory').value,
+                    allergies: document.getElementById('allergies').value.split(',').map(s => s.trim()).filter(Boolean),
+                    medications: document.getElementById('medications').value.split(',').map(s => s.trim()).filter(Boolean),
+                    vitals: document.getElementById('vitals').value,
+                    appointments: document.getElementById('appointments').value,
+                    testResults: document.getElementById('testResults').value,
+                };
+                
+                // 2. Data to update in the main 'users' document.
+                const userProfileUpdate = {
+                    phone: document.getElementById('phone').value,
+                    onboardingComplete: true
+                };
+
+                try {
+                    // Create a reference to the new document in the 'patientData' collection.
+                    // We use the user's UID as the document ID for a direct 1-to-1 link.
+                    const patientDataRef = doc(db, "patientData", user.uid);
+                    await setDoc(patientDataRef, patientMedicalData);
+                    
+                    // Also, update the main user document in the 'users' collection.
+                    const userRef = doc(db, "users", user.uid);
+                    await updateDoc(userRef, userProfileUpdate);
+
+                    alert("Your profile has been saved successfully!");
+                    window.location.href = 'patient.html';
+                } catch (error) {
+                    console.error("Error updating profile:", error);
+                    alert("An error occurred while saving. Please try again.");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

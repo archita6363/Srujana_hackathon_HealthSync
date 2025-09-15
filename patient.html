@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/09/14/05/20250914053436-VNGE9E55.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script> 
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Base transition for all buttons */
+        .category-btn { 
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out; 
+        }
+        .category-btn:hover {
+            transform: scale(1.02);
+        }
+        .category-btn.active {
+            font-weight: 600; 
+        }
+
+        /* --- LIGHT MODE COLORS --- */
+        /* By default, the background is transparent. It only appears on hover/active. */
+        #dashboardBtn { color: #1d4ed8; }
+        #dashboardBtn:hover, #dashboardBtn.active { background-color: #dbeafe; }
+
+        #profileButton { color: #6d28d9; }
+        #profileButton:hover, #profileButton.active { background-color: #ede9fe; }
+        
+        #doctorsBtn { color: #be185d; }
+        #doctorsBtn:hover, #doctorsBtn.active { background-color: #fce7f3; }
+
+        #appointmentsBtn { color: #b91c1c; }
+        #appointmentsBtn:hover, #appointmentsBtn.active { background-color: #fee2e2; }
+
+        #healthSummaryBtn { color: #0f766e; }
+        #healthSummaryBtn:hover, #healthSummaryBtn.active { background-color: #ccfbf1; }
+
+        #medicationsBtn { color: #c2410c; }
+        #medicationsBtn:hover, #medicationsBtn.active { background-color: #ffedd5; }
+        
+        #vitalsBtn { color: #4d7c0f; }
+        #vitalsBtn:hover, #vitalsBtn.active { background-color: #ecfccb; }
+
+        #testResultsBtn { color: #166534; }
+        #testResultsBtn:hover, #testResultsBtn.active { background-color: #dcfce7; }
+        
+        #messagesBtn { color: #0369a1; }
+        #messagesBtn:hover, #messagesBtn.active { background-color: #e0f2fe; }
+
+        #billingBtn { color: #5521B5; }
+        #billingBtn:hover, #billingBtn.active { background-color: #f4effc; }
+
+        #emergencyBtn { color: #991b1b; }
+        #emergencyBtn:hover, #emergencyBtn.active { background-color: #fee2e2; font-weight: 600; }
+
+        /* --- DARK MODE COLORS --- */
+        .dark .category-btn {
+            color: #d1d5db;
+            background-color: transparent;
+        }
+
+        .dark #dashboardBtn { color: #93c5fd; }
+        .dark #dashboardBtn:hover, .dark #dashboardBtn.active { background-color: #1e293b; color: #dbeafe; }
+
+        .dark #profileButton { color: #c4b5fd; }
+        .dark #profileButton:hover, .dark #profileButton.active { background-color: #1e293b; color: #ddd6fe; }
+
+        .dark #doctorsBtn { color: #f9a8d4; }
+        .dark #doctorsBtn:hover, .dark #doctorsBtn.active { background-color: #1e293b; color: #fbcfe8; }
+        
+        .dark #appointmentsBtn { color: #fca5a5; }
+        .dark #appointmentsBtn:hover, .dark #appointmentsBtn.active { background-color: #1e293b; color: #fecaca; }
+
+        .dark #healthSummaryBtn { color: #6ee7b7; }
+        .dark #healthSummaryBtn:hover, .dark #healthSummaryBtn.active { background-color: #1e293b; color: #a7f3d0; }
+
+        .dark #medicationsBtn { color: #fdba74; }
+        .dark #medicationsBtn:hover, .dark #medicationsBtn.active { background-color: #1e293b; color: #fed7aa; }
+
+        .dark #vitalsBtn { color: #a3e635; }
+        .dark #vitalsBtn:hover, .dark #vitalsBtn.active { background-color: #1e293b; color: #bef264; }
+
+        .dark #testResultsBtn { color: #86efac; }
+        .dark #testResultsBtn:hover, .dark #testResultsBtn.active { background-color: #1e293b; color: #bbf7d0; }
+
+        .dark #messagesBtn { color: #7dd3fc; }
+        .dark #messagesBtn:hover, .dark #messagesBtn.active { background-color: #1e293b; color: #bae6fd; }
+
+        .dark #billingBtn { color: #d8b4fe; }
+        .dark #billingBtn:hover, .dark #billingBtn.active { background-color: #1e293b; color: #e9d5ff; }
+
+        .dark #emergencyBtn { color: #fca5a5; }
+        .dark #emergencyBtn:hover, .dark #emergencyBtn.active { background-color: #450a0a; color: #fecaca; font-weight: 600; }
+        
+        /* Botpress Webchat Styles */
+        #webchat .bpWebchat { 
+            position: unset; 
+            width: 100%; 
+            height: 100%; 
+            max-height: 100%; 
+            max-width: 100%; 
+        } 
+
+        #webchat .bpFab { 
+            display: none; 
+        }
+    </style>
+</head>
+<body class="bg-[#F8F9FA] dark:bg-gray-900 font-sans antialiased text-[#343A40] dark:text-gray-200">
+    <div class="flex h-screen">
+        <div class="w-64 bg-white dark:bg-gray-800 p-6 shadow-lg flex flex-col">
+            <div class="flex items-center space-x-4 mb-8">
+                <div id="patientInitials" class="h-10 w-10 rounded-full bg-[#007BFF] text-white flex items-center justify-center font-bold text-xl"></div>
+                <h1 id="patientNameSidebar" class="text-xl font-bold text-[#343A40] dark:text-gray-200"></h1>
+            </div>
+            <nav class="space-y-2 flex-grow">
+                <button id="dashboardBtn" data-target="dashboardContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Dashboard</button>
+                <button id="profileButton" data-target="profileContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">My Profile</button>
+                <button id="doctorsBtn" data-target="doctorsContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">My Doctors</button>
+                <button id="appointmentsBtn" data-target="appointmentsContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Appointments</button>
+                <button id="healthSummaryBtn" data-target="healthSummaryContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Health Summary</button>
+                <button id="medicationsBtn" data-target="medicationsContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Medications</button>
+                <button id="vitalsBtn" data-target="vitalsContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Vitals & Tracking</button>
+                <button id="testResultsBtn" data-target="testResultsContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Test Results</button>
+                <button id="messagesBtn" data-target="messagesContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Messages</button>
+                <button id="billingBtn" data-target="billingContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Billing</button>
+                <button id="emergencyBtn" data-target="emergencyContent" class="category-btn w-full text-left flex items-center p-3 rounded-lg text-lg font-medium">Emergency</button>
+            </nav>
+            </div>
+
+        <div class="flex-1 p-8 overflow-y-auto">
+            <header class="flex justify-between items-center mb-4">
+                <h2 id="patientNameHeader" class="text-3xl font-bold text-[#343A40] dark:text-gray-200"></h2>
+                
+                <div class="flex items-center gap-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"></button>
+                    
+                    <button id="logoutBtn" title="Logout" class="p-2 rounded-full text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/50 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    </button>
+                </div>
+            </header>
+            <p id="welcomeMessage" class="text-gray-700 dark:text-gray-300 mb-6"></p>
+
+            <div id="dashboardContent" class="category-content">
+                <div class="flex flex-wrap gap-6 justify-center mb-10">
+                    <div class="p-6 rounded-xl shadow-md text-center w-48 h-48 bg-[#87CEEB] dark:bg-sky-700 flex flex-col justify-center">
+                        <p id="appointmentsCount" class="text-3xl font-extrabold"></p>
+                        <h3 class="text-lg font-semibold mt-2">Upcoming Appointments</h3>
+                    </div>
+                    <div class="p-6 rounded-xl shadow-md text-center w-48 h-48 bg-[#87CEEB] dark:bg-sky-700 flex flex-col justify-center">
+                        <p id="careTeamCount" class="text-3xl font-extrabold">0</p>
+                        <h3 class="text-lg font-semibold mt-2">Care Team Members</h3>
+                    </div>
+                    <div class="p-6 rounded-xl shadow-md text-center w-48 h-48 bg-[#87CEEB] dark:bg-sky-700 flex flex-col justify-center">
+                        <p id="medicationsCount" class="text-3xl font-extrabold"></p>
+                        <h3 class="text-lg font-semibold mt-2">Medications</h3>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Recent Activity</h3>
+                    <div id="recentActivity" class="space-y-4"></div>
+                </div>
+            </div>
+            
+            <div id="profileContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">My Profile</h3>
+                    <div class="space-y-4">
+                        <p><strong>Full Name:</strong> <span id="profileName"></span></p>
+                        <p><strong>Patient ID:</strong> <span id="profilePatientId"></span></p>
+                        <p><strong>Date of Birth:</strong> <span id="profileDob"></span></p>
+                        <p><strong>Emergency Contact:</strong> <span id="profilePhone"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="doctorsContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Your Care Team</h3>
+                    <p>This is a demo section. Doctor information would be loaded here in a future update.</p>
+                </div>
+            </div>
+
+            <div id="appointmentsContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Upcoming Appointments</h3>
+                    <div id="upcomingAppointmentsList" class="space-y-4"></div>
+                </div>
+            </div>
+
+            <div id="healthSummaryContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Health Summary</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold">Patient Info</h4>
+                            <p><strong>Name:</strong> <span id="summaryPatientName"></span></p>
+                            <p><strong>Age:</strong> <span id="summaryPatientAge"></span></p>
+                            <p><strong>Patient ID:</strong> <span id="summaryPatientId"></span></p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold">Primary Diagnoses</h4>
+                            <ul id="summaryDiagnoses" class="list-disc list-inside"></ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold">Recent Vitals</h4>
+                            <p id="summaryVitals"></p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold">Recent Lab Results</h4>
+                            <p id="summaryLabResults"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="medicationsContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Your Medications</h3>
+                    <div id="medicationsList" class="space-y-4"></div>
+                </div>
+            </div>
+
+            <div id="vitalsContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Vitals Log</h3>
+                    <div id="vitalsLog" class="space-y-4"></div>
+                </div>
+            </div>
+
+            <div id="testResultsContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Lab Results</h3>
+                    <div id="testResultsList" class="space-y-4"></div>
+                </div>
+            </div>
+
+            <div id="messagesContent" class="category-content hidden">
+                 <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Messages</h3>
+                    <p>This is a demo section. Your messages would appear here.</p>
+                </div>
+            </div>
+
+            <div id="billingContent" class="category-content hidden">
+                 <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Billing</h3>
+                    <p>This is a demo section. Your billing information would appear here.</p>
+                </div>
+            </div>
+
+            <div id="emergencyContent" class="category-content hidden">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6 text-red-600">Patient Emergency Information</h3>
+                    <ul class="text-base space-y-2">
+                        <li><strong>Blood Group:</strong> <span id="emergencyBloodGroup"></span></li>
+                        <li><strong>Allergies:</strong> <span id="emergencyAllergies"></span></li>
+                        <li><strong>Chronic Conditions:</strong> <span id="emergencyConditions"></span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="webchat" style="width: 500px; height: 500px; margin-top: 2rem;"></div> 
+
+        </div>
+    </div>
+    
+    <script type="module" src="patient-dashboard-handler.js"></script>
+
+    <script> 
+        window.botpress.on("webchat:ready", () => { 
+            // your code here 
+        }); 
+    </script> 
+    <script> 
+        window.botpress.open(); 
+        
+        window.botpress.init({ 
+            "botId": "42aaca26-9deb-4921-8062-b291546584f8", 
+            "configuration": { 
+                "version": "v2", 
+                "botName": "HealthSync Support Assistant", 
+                "botDescription": "I can assist you with personalized support, answer questions about HealthSync, and help you get started.", 
+                "website": {}, 
+                "email": {}, 
+                "phone": {}, 
+                "termsOfService": {}, 
+                "privacyPolicy": {}, 
+                "color": "#3276EA", 
+                "variant": "solid", 
+                "headerVariant": "glass", 
+                "themeMode": "light", 
+                "fontFamily": "inter", 
+                "radius": 4, 
+                "feedbackEnabled": true, 
+                "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)", 
+                "soundEnabled": true 
+            }, 
+            "clientId": "c3be3eaf-ba43-4214-b7a9-7f9b885a9d8e", 
+            "selector": "#webchat" 
+        }); 
+    </script> 
+</body>
+</html>

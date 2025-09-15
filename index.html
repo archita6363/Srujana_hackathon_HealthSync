@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HealthSync Chat</title>
+</head>
+<body>
+    <input type="text" id="user" placeholder="Username">
+    <input type="text" id="message" placeholder="Type your message">
+    <button onclick="sendChat()">Send</button>
+    <div id="reply"></div>
+
+    <script>
+    function sendChat() {
+        const user = document.getElementById('user').value;
+        const message = document.getElementById('message').value;
+        fetch('http://localhost:8000/chat/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user, message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('reply').innerText = 'AI Reply: ' + data.reply;
+        });
+    }
+    </script>
+</body>
+</html>

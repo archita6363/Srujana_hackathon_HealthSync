@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .form-section {
+            border-top: 4px solid #007BFF; /* Ocean Blue header accent */
+        }
+    </style>
+</head>
+<body class="bg-[#0d1b2a] text-[#F8F9FA] flex items-center justify-center min-h-screen p-4">
+
+    <div id="loader">
+        <p class="text-xl font-medium text-gray-300">Checking session...</p>
+    </div>
+
+    <div id="authContainer" class="w-full max-w-md hidden">
+
+        <div id="loginView" class="form-section bg-[#112233] p-8 rounded-xl">
+            <h1 class="text-2xl font-bold mb-2 text-center text-[#F8F9FA]">Welcome Back!</h1>
+            <p class="text-gray-300 mb-6 text-center">Sign in to continue.</p>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 text-white rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007BFF] focus:border-[#007BFF]">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 text-white rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    <div class="text-right text-sm mt-2">
+                        <a href="#" id="forgotPasswordLink" class="font-medium text-[#007BFF] hover:underline">Forgot Password?</a>
+                    </div>
+                </div>
+                <div id="loginErrorMessage" class="hidden text-red-400 text-sm p-2 text-center rounded-md bg-red-900/30 border border-red-400/50">
+                </div>
+                <button type="submit" class="w-full bg-[#007BFF] text-white py-3 rounded-lg font-semibold hover:bg-[#0056b3] transition duration-300">Sign In</button>
+            </form>
+            
+            <div class="relative flex py-5 items-center">
+                <div class="flex-grow border-t border-gray-600"></div>
+                <span class="flex-shrink mx-4 text-gray-400 text-sm">OR</span>
+                <div class="flex-grow border-t border-gray-600"></div>
+            </div>
+
+            <a href="#" id="googleLoginBtn" class="w-full flex items-center justify-center bg-white text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition duration-300">
+                <svg class="w-5 h-5 mr-3" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M48 24C48 22.0427 47.8211 20.1245 47.4822 18.2727H24.5V28.8182H37.8136C37.2182 32.1273 35.5455 34.8545 32.8636 36.6727V42.8182H41.0227C45.3818 38.8182 48 32.0455 48 24Z" fill="#4285F4"/>
+                    <path d="M24.5 48C31.0227 48 36.5 45.8182 41.0227 42.8182L32.8636 36.6727C30.6818 38.1273 27.8182 39 24.5 39C18.2273 39 12.9091 35.0455 11.0455 29.5455H2.63636V35.8182C6.95455 43.1455 15.0455 48 24.5 48Z" fill="#34A853"/>
+                    <path d="M11.0455 29.5455C10.5 28.0909 10.1818 26.5455 10.1818 25C10.1818 23.4545 10.5 21.9091 11.0455 20.4545V14.1818H2.63636C0.954545 17.3182 0 21.0455 0 25C0 28.9545 0.954545 32.6818 2.63636 35.8182L11.0455 29.5455Z" fill="#FBBC05"/>
+                    <path d="M24.5 9C28.2727 9 31.3636 10.3636 33.7273 12.5455L41.2727 5.18182C36.7727 1.22727 31.0227 0 24.5 0C15.0455 0 6.95455 4.85455 2.63636 12.1818L11.0455 18.4545C12.9091 12.9545 18.2273 9 24.5 9Z" fill="#EA4335"/>
+                </svg>
+                Sign in with Google
+            </a>
+            
+            <div class="mt-4 text-center text-sm">
+                <p class="text-gray-400">Don't have an account? <a href="signup.html" class="font-medium text-[#007BFF] hover:underline">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // --- Firebase Configuration ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCL1crs6TFPLZLZR607kBU1UHkYrGaCxmU",
+            authDomain: "healthsync-7263e.firebaseapp.com",
+            projectId: "healthsync-7263e",
+            storageBucket: "healthsync-7263e.appspot.com",
+            messagingSenderId: "769113656753",
+            appId: "1:769113656753:web:f80edc9673615912d44190"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- Element Selectors ---
+        const loginForm = document.getElementById('loginForm');
+        const googleLoginBtn = document.getElementById('googleLoginBtn');
+        const errorMessageDiv = document.getElementById('loginErrorMessage');
+        const loader = document.getElementById('loader');
+        const authContainer = document.getElementById('authContainer');
+
+        // --- Helper Functions ---
+        function showMessage(message, isError = true) {
+            errorMessageDiv.textContent = message;
+            errorMessageDiv.className = isError 
+                ? 'block text-red-400 text-sm p-2 text-center rounded-md bg-red-900/30 border border-red-400/50' 
+                : 'block text-green-400 text-sm p-2 text-center rounded-md bg-green-900/30 border border-green-400/50';
+        }
+
+        function redirectToDashboard(role) {
+            if (role === 'patient') {
+                window.location.href = "patient.html";
+            } else if (role === 'doctor') {
+                window.location.href = "doctor.html";
+            } else {
+                console.error("Unknown role:", role);
+                // If role is unknown, show the login form instead of getting stuck
+                loader.classList.add('hidden');
+                authContainer.classList.remove('hidden');
+                showMessage("Could not determine user role. Please contact support.");
+            }
+        }
+        
+        // --- Auth State Observer ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in, get their role and redirect.
+                const userDocRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userDocRef);
+
+                if (userDoc.exists()) {
+                    const role = userDoc.data().role;
+                    redirectToDashboard(role);
+                } else {
+                    // Auth record exists but no user profile in Firestore.
+                    // This is an inconsistent state, so sign out and show login form.
+                    console.error("User authenticated, but no profile data found in Firestore.");
+                    await auth.signOut();
+                    loader.classList.add('hidden');
+                    authContainer.classList.remove('hidden');
+                }
+            } else {
+                // User is signed out, show the login form.
+                loader.classList.add('hidden');
+                authContainer.classList.remove('hidden');
+            }
+        });
+
+        // --- Google Sign-In Logic ---
+        async function handleGoogleSignIn() {
+            const provider = new GoogleAuthProvider();
+            
+            try {
+                showMessage("Opening Google Sign-In...", false);
+                const result = await signInWithPopup(auth, provider);
+                // The onAuthStateChanged observer will handle the redirect automatically.
+            } catch (error) {
+                console.error("Google Sign-In Error:", error);
+                if (error.code !== 'auth/popup-closed-by-user') {
+                    showMessage("An error occurred during sign-in. Please try again.");
+                } else {
+                    errorMessageDiv.classList.add('hidden');
+                }
+            }
+        }
+
+        // --- Email/Password Sign-In Logic ---
+        async function handleEmailPasswordSignIn(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                showMessage("Signing in...", false);
+                await signInWithEmailAndPassword(auth, email, password);
+                // The onAuthStateChanged observer will handle the redirect automatically.
+            } catch (error) {
+                console.error("Email/Password Sign-In Error:", error);
+                if (error.code === 'auth/invalid-credential') {
+                    showMessage("Invalid email or password. Please try again.");
+                } else {
+                    showMessage("An error occurred. Please try again.");
+                }
+            }
+        }
+
+        // Attach Event Listeners
+        googleLoginBtn.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            handleGoogleSignIn();
+        });
+
+        loginForm.addEventListener('submit', handleEmailPasswordSignIn);
+
+    </script>
+
+</body>
+</html>

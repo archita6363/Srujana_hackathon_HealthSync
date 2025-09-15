@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* A simple transition for a smoother experience when forms appear */
+        .form-section {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            border-top: 4px solid #007BFF; /* Ocean Blue header accent */
+        }
+    </style>
+</head>
+<body class="bg-[#0d1b2a] text-[#F8F9FA] flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-md">
+
+        <div id="roleSelection" class="form-section bg-[#112233] p-8 rounded-xl text-center">
+            <h1 class="text-2xl font-bold mb-2 text-[#F8F9FA]">Welcome!</h1>
+            <p class="text-gray-300 mb-8">Let's get you set up. Please choose your role to begin.</p>
+            <div class="space-y-4">
+                <button id="selectPatientBtn" class="w-full bg-[#007BFF] text-white py-3 rounded-lg font-semibold hover:bg-[#0056b3] transition duration-300">I am a Patient</button>
+                <button id="selectDoctorBtn" class="w-full bg-[#007BFF] text-white py-3 rounded-lg font-semibold hover:bg-[#0056b3] transition duration-300">I am a Doctor</button>
+            </div>
+        </div>
+
+        <div id="patientForm" class="hidden form-section bg-[#112233] p-8 rounded-xl">
+            <button id="patientBackBtn" class="text-sm text-[#007BFF] hover:underline mb-4">&larr; Choose a different role</button>
+            <h2 class="text-xl font-bold mb-1 text-[#F8F9FA]">Patient Registration</h2>
+            <p class="text-gray-300 mb-6">Create your patient account.</p>
+            <form id="patientRegisterForm" class="space-y-4">
+                <div>
+                    <label for="p-name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                    <input type="text" id="p-name" placeholder="John Doe" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                </div>
+                <div>
+                    <label for="p-email" class="block text-sm font-medium text-gray-300">Email Address</label>
+                    <input type="email" id="p-email" placeholder="johndoe@example.com" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                </div>
+                <div>
+                    <label for="p-country" class="block text-sm font-medium text-gray-300">Country of Origin</label>
+                    <input type="text" id="p-country" placeholder="e.g., India" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                </div>
+                <div>
+                    <label for="p-phone" class="block text-sm font-medium text-gray-300">Phone Number</label>
+                    <input type="tel" id="p-phone" placeholder="+91 98765 43210" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                </div>
+                <div>
+                    <label for="p-password" class="block text-sm font-medium text-gray-300">Create Password</label>
+                    <input type="password" id="p-password" placeholder="••••••••" required minlength="6" class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                </div>
+                <button type="submit" class="w-full bg-[#007BFF] text-white py-3 rounded-lg font-semibold hover:bg-[#0056b3] transition duration-300">Create Account</button>
+            </form>
+            <div class="relative flex py-4 items-center">
+                <div class="flex-grow border-t border-gray-600"></div><span class="flex-shrink mx-4 text-gray-400 text-sm">or</span><div class="flex-grow border-t border-gray-600"></div>
+            </div>
+            <button id="patientGoogleSignUpBtn" class="w-full bg-white text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-200 transition duration-300 flex items-center justify-center gap-2 shadow-sm">
+                <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.42-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg>
+                Sign Up with Google
+            </button>
+            <div id="patient-message" class="text-center text-sm mt-4"></div>
+        </div>
+
+        <div id="doctorFormContainer" class="hidden">
+            <div id="doctorStep1" class="form-section bg-[#112233] p-8 rounded-xl">
+                <button id="doctorBackBtn1" class="text-sm text-[#007BFF] hover:underline mb-4">&larr; Choose a different role</button>
+                <h2 class="text-xl font-bold mb-1 text-[#F8F9FA]">Doctor Registration (1/2)</h2>
+                <p class="text-gray-300 mb-6">Start with your personal details.</p>
+                <form id="doctorStep1Form" class="space-y-4">
+                    <div>
+                        <label for="d-name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                        <input type="text" id="d-name" placeholder="Dr. Jane Smith" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    </div>
+                    <div>
+                        <label for="d-email" class="block text-sm font-medium text-gray-300">Email Address</label>
+                        <input type="email" id="d-email" placeholder="janesmith@clinic.com" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    </div>
+                     <div>
+                        <label for="d-country" class="block text-sm font-medium text-gray-300">Country of Origin</label>
+                        <input type="text" id="d-country" placeholder="e.g., Canada" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    </div>
+                    <div>
+                        <label for="d-phone" class="block text-sm font-medium text-gray-300">Phone Number</label>
+                        <input type="tel" id="d-phone" placeholder="+1 (555) 987-6543" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    </div>
+                    <div>
+                        <label for="d-password" class="block text-sm font-medium text-gray-300">Create Password</label>
+                        <input type="password" id="d-password" placeholder="••••••••" required minlength="6" class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    </div>
+                    <button type="button" id="doctorNextBtn" class="w-full bg-[#007BFF] text-white py-3 rounded-lg font-semibold hover:bg-[#0056b3] transition duration-300">Next: Professional Info</button>
+                </form>
+                 <div class="relative flex py-4 items-center">
+                    <div class="flex-grow border-t border-gray-600"></div><span class="flex-shrink mx-4 text-gray-400 text-sm">or</span><div class="flex-grow border-t border-gray-600"></div>
+                </div>
+                <button id="doctorGoogleSignUpBtn" class="w-full bg-white text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-200 transition duration-300 flex items-center justify-center gap-2 shadow-sm">
+                    <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.42-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg>
+                    Sign Up with Google
+                </button>
+            </div>
+            <div id="doctorStep2" class="hidden form-section bg-[#112233] p-8 rounded-xl">
+                <button id="doctorBackBtn2" class="text-sm text-[#007BFF] hover:underline mb-4">&larr; Back to Personal Details</button>
+                <h2 class="text-xl font-bold mb-1 text-[#F8F9FA]">Doctor Registration (2/2)</h2>
+                <p class="text-gray-300 mb-6">Tell us about your practice.</p>
+                <form id="doctorRegisterForm" class="space-y-4">
+                    <div>
+                        <label for="d-hospital" class="block text-sm font-medium text-gray-300">Hospital / Clinic</label>
+                        <input type="text" id="d-hospital" placeholder="General Hospital" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    </div>
+                    <div>
+                        <label for="d-specialization" class="block text-sm font-medium text-gray-300">Specialization</label>
+                        <input type="text" id="d-specialization" placeholder="e.g., Cardiology" required class="mt-1 block w-full px-3 py-2 bg-[#1b2f44] border border-gray-600 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
+                    </div>
+                    <button type="submit" class="w-full bg-[#007BFF] text-white py-3 rounded-lg font-semibold hover:bg-[#0056b3] transition duration-300">Complete Registration</button>
+                </form>
+                <div id="doctor-message" class="text-center text-sm mt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // --- Firebase Configuration ---
+        // IMPORTANT: For production, use environment variables and Firebase security rules
+        // to protect your API keys. Do not expose them directly in client-side code.
+        const firebaseConfig = {
+            apiKey: "AIzaSyCL1crs6TFPLZLZR607kBU1UHkYrGaCxmU",
+            authDomain: "healthsync-7263e.firebaseapp.com",
+            projectId: "healthsync-7263e",
+            storageBucket: "healthsync-7263e.appspot.com",
+            messagingSenderId: "769113656753",
+            appId: "1:769113656753:web:f80edc9673615912d44190"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- Element Selectors ---
+        const roleSelection = document.getElementById('roleSelection');
+        const patientFormContainer = document.getElementById('patientForm');
+        const doctorFormContainer = document.getElementById('doctorFormContainer');
+        const doctorStep1 = document.getElementById('doctorStep1');
+        const doctorStep2 = document.getElementById('doctorStep2');
+        const patientMessageDiv = document.getElementById('patient-message');
+        const doctorMessageDiv = document.getElementById('doctor-message');
+
+        // Buttons
+        const selectPatientBtn = document.getElementById('selectPatientBtn');
+        const selectDoctorBtn = document.getElementById('selectDoctorBtn');
+        const patientGoogleSignUpBtn = document.getElementById('patientGoogleSignUpBtn');
+        const doctorGoogleSignUpBtn = document.getElementById('doctorGoogleSignUpBtn');
+        const doctorNextBtn = document.getElementById('doctorNextBtn');
+        const patientBackBtn = document.getElementById('patientBackBtn');
+        const doctorBackBtn1 = document.getElementById('doctorBackBtn1');
+        const doctorBackBtn2 = document.getElementById('doctorBackBtn2');
+
+        // Forms
+        const patientForm = document.getElementById('patientRegisterForm');
+        const doctorForm = document.getElementById('doctorRegisterForm');
+        const doctorStep1Form = document.getElementById('doctorStep1Form');
+
+
+        // --- UI Logic: View Switching ---
+        function showRoleSelection() {
+            roleSelection.classList.remove('hidden');
+            patientFormContainer.classList.add('hidden');
+            doctorFormContainer.classList.add('hidden');
+        }
+
+        function showDoctorStep1() {
+            doctorStep1.classList.remove('hidden');
+            doctorStep2.classList.add('hidden');
+        }
+
+        selectPatientBtn.addEventListener('click', () => {
+            roleSelection.classList.add('hidden');
+            patientFormContainer.classList.remove('hidden');
+        });
+
+        selectDoctorBtn.addEventListener('click', () => {
+            roleSelection.classList.add('hidden');
+            doctorFormContainer.classList.remove('hidden');
+            showDoctorStep1();
+        });
+
+        doctorNextBtn.addEventListener('click', () => {
+            // Simple validation before proceeding
+            if (doctorStep1Form.checkValidity()) {
+                 doctorStep1.classList.add('hidden');
+                 doctorStep2.classList.remove('hidden');
+            } else {
+                doctorStep1Form.reportValidity();
+            }
+        });
+
+        patientBackBtn.addEventListener('click', showRoleSelection);
+        doctorBackBtn1.addEventListener('click', showRoleSelection);
+        doctorBackBtn2.addEventListener('click', showDoctorStep1);
+
+
+        // --- Helper Functions ---
+        function showMessage(element, message, isError = false) {
+            element.textContent = message;
+            element.className = isError ? 'text-red-400 text-center text-sm mt-4' : 'text-green-400 text-center text-sm mt-4';
+        }
+
+        function redirectToDashboard(role) {
+            if (role === 'patient') {
+                window.location.href = "patient-onboarding.html"; // Or patient.html if onboarding is not needed
+            } else if (role === 'doctor') {
+                window.location.href = "doctor.html"; // Redirect to doctor dashboard or login
+            }
+        }
+
+        // --- Firebase Logic ---
+
+        // Unified Google Sign-Up Handler
+        async function handleGoogleSignUp(role) {
+            const provider = new GoogleAuthProvider();
+            const messageDiv = role === 'patient' ? patientMessageDiv : doctorMessageDiv;
+            
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                
+                const userDocRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userDocRef);
+
+                if (!userDoc.exists()) {
+                    console.log(`New ${role} signing up with Google.`);
+                    const userProfile = {
+                        name: user.displayName,
+                        email: user.email,
+                        role: role,
+                        createdAt: new Date(),
+                        uid: user.uid
+                    };
+                    await setDoc(userDocRef, userProfile);
+                    
+                    showMessage(messageDiv, `Account created with Google! Redirecting...`);
+                    setTimeout(() => redirectToDashboard(role), 2000);
+                } else {
+                    console.log("Existing user signing in with Google.");
+                    showMessage(messageDiv, "Welcome back! Redirecting...");
+                    // Check if the stored role matches the attempted sign-up role
+                    const existingRole = userDoc.data().role;
+                    setTimeout(() => redirectToDashboard(existingRole), 2000);
+                }
+            } catch (error) {
+                console.error("Google Sign-Up Error:", error);
+                showMessage(messageDiv, "Error with Google Sign-Up: " + error.message, true);
+            }
+        }
+        
+        patientGoogleSignUpBtn.addEventListener('click', () => handleGoogleSignUp('patient'));
+        doctorGoogleSignUpBtn.addEventListener('click', () => handleGoogleSignUp('doctor'));
+
+
+        // Email/Password Registration
+        async function registerUser(email, password, userProfile) {
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                await setDoc(doc(db, "users", user.uid), {
+                    ...userProfile,
+                    uid: user.uid,
+                    createdAt: new Date()
+                });
+                return { success: true, user: user };
+            } catch (error) {
+                console.error("Error during registration:", error);
+                if (error.code === 'auth/email-already-in-use') {
+                    return { success: false, error: "This email address is already in use." };
+                }
+                return { success: false, error: error.message };
+            }
+        }
+
+        // --- Form Submission Handler ---
+        async function handleSubmit(event, role) {
+            event.preventDefault();
+            let email, password, userProfile, doctorData = null;
+            const messageDiv = role === 'patient' ? patientMessageDiv : doctorMessageDiv;
+
+            if (role === 'patient') {
+                email = document.getElementById('p-email').value;
+                password = document.getElementById('p-password').value;
+                userProfile = {
+                    name: document.getElementById('p-name').value,
+                    country: document.getElementById('p-country').value,
+                    phone: document.getElementById('p-phone').value,
+                    email: email,
+                    role: 'patient'
+                };
+            } else if (role === 'doctor') {
+                email = document.getElementById('d-email').value;
+                password = document.getElementById('d-password').value;
+                userProfile = {
+                    name: document.getElementById('d-name').value,
+                    country: document.getElementById('d-country').value,
+                    phone: document.getElementById('d-phone').value,
+                    email: email,
+                    role: 'doctor'
+                };
+                doctorData = {
+                    hospital: document.getElementById('d-hospital').value,
+                    specialization: document.getElementById('d-specialization').value
+                };
+            }
+
+            showMessage(messageDiv, "Creating account, please wait...");
+            const result = await registerUser(email, password, userProfile);
+
+            if (result.success) {
+                // If it's a doctor, save the extra data to the 'doctorData' collection
+                if (role === 'doctor' && doctorData) {
+                    try {
+                        const doctorDataRef = doc(db, "doctorData", result.user.uid);
+                        await setDoc(doctorDataRef, {
+                            uid: result.user.uid,
+                            ...doctorData
+                        });
+                        console.log("Doctor professional data saved successfully.");
+                    } catch (error) {
+                        console.error("Error saving doctor data:", error);
+                        showMessage(messageDiv, "Account created, but failed to save professional data.", true);
+                        return;
+                    }
+                }
+                
+                showMessage(messageDiv, "Registration successful! Redirecting...");
+                setTimeout(() => redirectToDashboard(role), 2000);
+            } else {
+                showMessage(messageDiv, `Registration failed: ${result.error}`, true);
+            }
+        }
+
+        // Attach submit listeners to the forms
+        patientForm.addEventListener('submit', (event) => handleSubmit(event, 'patient'));
+        doctorForm.addEventListener('submit', (event) => handleSubmit(event, 'doctor'));
+
+    </script>
+</body>
+</html>
